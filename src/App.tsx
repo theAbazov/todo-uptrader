@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.less";
 import "./App.css";
 import { Attach } from "./components/AttachModal";
 
