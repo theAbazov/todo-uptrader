@@ -1,7 +1,5 @@
 import React, { FC, useState } from "react";
 
-import { v4 } from "uuid";
-
 export const Attach: FC = () => {
   const [link, setLink] = useState<any[]>([]);
 
@@ -26,8 +24,8 @@ export const Attach: FC = () => {
       {link &&
         link.map(({ href, name }) => {
           return (
-            <div key={v4()}>
-              <a href={href} target="_blank">
+            <div>
+              <a href={href} target="_blank" rel="noreferrer">
                 {name}
               </a>
             </div>
