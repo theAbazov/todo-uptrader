@@ -1,0 +1,145 @@
+@import "../../vars.scss";
+
+.desks {
+  &__header {
+    background: $card-color;
+    height: 80px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    &-start {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+    }
+    .btns {
+      border: 1px solid $border-color;
+      outline: none;
+      padding: 3px 15px;
+      border-radius: 5px;
+      color: $text-df;
+      &:hover {
+        color: white;
+        border-color: $borderHover-color;
+      }
+    }
+    &-edit {
+      margin-left: 20px;
+      background: $bg-color;
+    }
+    &-delete {
+      background: $danger-color;
+    }
+  }
+
+  &-content {
+    display: flex;
+    padding: 40px;
+    justify-content: space-between;
+  }
+}
+
+.board {
+  width: 30%;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  height: 400px;
+  &__title {
+    padding: 10px 0;
+    font-size: 24px;
+    text-align: center;
+    border-bottom: 1px solid $border-color;
+  }
+  &__item {
+    width: 90%;
+    margin: 10px auto;
+    height: 100px;
+  }
+}
+
+.item {
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  background: $card-color;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__title {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+
+    &-taskcount {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 10px;
+      width: 13px;
+      border-radius: 50%;
+      border: 1px solid $info-color;
+      position: relative;
+      top: 7px;
+      left: -3px;
+    }
+  }
+  &__deadline {
+    font-size: 14px;
+  }
+  &__body {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__more {
+    background: $success-color;
+    padding: 5px 15px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+  }
+}
+
+.editProject {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.759);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  &__content {
+    display: flex;
+    input,
+    button {
+      color: $text-df;
+      height: 24px;
+      outline: none;
+      padding: 5px 15px;
+      border: 1px solid $border-color;
+      border-radius: 5px;
+    }
+    input {
+      background: $card-color;
+      margin-right: 20px;
+    }
+    button {
+      background: $success-color;
+    }
+  }
+}
+
+.indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 0 5px;
+}

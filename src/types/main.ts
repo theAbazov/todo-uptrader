@@ -1,0 +1,41 @@
+export interface Item {
+  id: number;
+  title: string;
+  desc: string;
+  prior: string;
+  comments: Comment[];
+  tasks: Task[];
+  files?: File[];
+  deadline: string;
+  created: Date;
+  devTime: number;
+}
+
+export interface File {
+  name: string;
+  url: string;
+}
+
+export interface Task {
+  title: string;
+  completed: boolean;
+}
+
+export interface Comment {
+  text: string;
+  comments: Comment[];
+}
+
+export interface Board {
+  id: number;
+  title: string;
+  items: Item[];
+}
+
+export interface Project {
+  id: number;
+  projectName: string;
+  data: Board[];
+}
+
+export type setFn = (boards: Board[]) => any;

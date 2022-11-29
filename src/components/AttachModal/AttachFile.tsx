@@ -24,7 +24,7 @@ export const Attach: FC = () => {
       {link &&
         link.map(({ href, name }) => {
           return (
-            <div>
+            <div key={name}>
               <a href={href} target="_blank" rel="noreferrer">
                 {name}
               </a>

@@ -1,0 +1,27 @@
+@import "./vars.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: $bg-color;
+  color: $text-df;
+}
+
+.container {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.app {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

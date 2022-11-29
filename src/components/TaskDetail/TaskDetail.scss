@@ -1,0 +1,92 @@
+@import "../../vars.scss";
+
+.taskdetail {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  &-content {
+    background: $bg-color;
+    padding: 20px;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    width: 800px;
+  }
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border-color;
+    span {
+      color: $text-secondary;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    column-gap: 10px;
+    button {
+      font-size: 12px;
+      padding: 2px 12px;
+      border: 1px solid $border-color;
+      outline: none;
+      border-radius: 3px;
+      color: $text-df;
+      cursor: pointer;
+    }
+    &-edit {
+      background: $card-color;
+    }
+    &-delete {
+      background: $danger-color;
+    }
+  }
+  &__desc {
+    font-size: 14px;
+    margin-top: 20px;
+    padding-left: 20px;
+    border-left: 1px solid $border-color;
+  }
+  &__childs {
+    margin-top: 20px;
+    padding-left: 20px;
+    border-left: 1px solid $border-color;
+  }
+  &__child {
+    display: flex;
+    margin-left: 20px;
+    input {
+      margin-right: 10px;
+    }
+  }
+  &__files {
+    padding-left: 20px;
+    margin-top: 20px;
+    border-left: 1px solid $border-color;
+  }
+
+  &__file {
+    margin: 2px 20px;
+    display: flex;
+    justify-content: space-between;
+    color: #58a6ff;
+    .download {
+      border: 1px solid $border-color;
+      background: $success-color;
+      padding: 0 5px;
+      border-radius: 3px;
+      color: $text-df;
+    }
+  }
+  &__foot {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    border-top: 1px solid $border-color;
+    padding-top: 10px;
+  }
+}
