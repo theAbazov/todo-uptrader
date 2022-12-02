@@ -66,10 +66,10 @@ class Todo {
         project.data = project.data.map((board) => {
           board.items = board.items.map((item) => {
             item.tasks = item.tasks.map((task) => {
-              if (task.id === taskId) {
-                task.completed = !task.completed;
-              }
               if (item.id === itemId) {
+                if (task.id === taskId) {
+                  task.completed = !task.completed;
+                }
                 res.push(task);
               }
               return task;
