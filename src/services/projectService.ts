@@ -22,7 +22,6 @@ export class projectService {
       return project;
     });
     localStorage.setItem("projects", JSON.stringify(projects));
-    console.log(projects);
     return projects;
   }
 
