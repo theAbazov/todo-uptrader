@@ -1,0 +1,71 @@
+@import "../../vars.scss";
+
+.create {
+  position: absolute;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.667);
+  &-content {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    height: 500px;
+    background: $bg-color;
+    padding: 20px;
+  }
+  &__title {
+    text-align: center;
+  }
+  input {
+    border: 1px solid $border-color;
+    outline: none;
+    color: $text-df;
+    background: $card-color;
+    border-radius: 3px;
+    padding: 2px 10px;
+    &::placeholder {
+      color: rgb(185, 185, 185);
+    }
+  }
+  h3 {
+    margin: 10px 0;
+  }
+  &__desc {
+    resize: none;
+    outline: none;
+    background: $card-color;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    padding: 10px;
+    color: $text-df;
+  }
+  &-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__right {
+    width: 450px;
+  }
+  &__files {
+    label {
+      margin-top: 20px;
+      margin-left: 20px;
+      border: 1px solid $border-color;
+      border-radius: 3px;
+      background-color: $card-color;
+      padding: 0 10px;
+    }
+  }
+  &__tasks {
+  }
+  .add-todo {
+    padding: 5px 15px;
+    background: $success-color;
+    border-radius: 5px;
+  }
+}

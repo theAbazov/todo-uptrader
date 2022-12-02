@@ -54,16 +54,19 @@ class dndService {
 
   onOver(e: any) {
     e.preventDefault();
+    e.stopPropagation();
     if (e.target.className === "item") {
-      e.target.style.boxShadow = "0 4px 3px gray";
+      e.target.style.boxShadow = "0 4px 3px red";
     }
   }
 
   onEnd(e: any) {
+    e.stopPropagation();
     e.target.style.boxShadow = "none";
   }
 
   onLeave(e: any) {
+    e.stopPropagation();
     e.target.style.boxShadow = "none";
   }
 }
@@ -73,46 +76,29 @@ const init: Board[] = [
     id: 1,
     title: "Queue",
     items: [
-      {
-        id: 1,
-        title: "TODOLIST",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur cumque dolorem similique minima adipisci eligendi voluptas voluptatum ut saepe laudantium!",
-        prior: "high",
-        tasks: [
-          { title: "Dnd", completed: true },
-          { title: "UI", completed: false },
-        ],
-        deadline: "23-12-2022",
-        devTime: 0,
-        created: new Date(),
-        files: [],
-        comments: [
-          {
-            text: "lorem lorem lorem lorem",
-            comments: [{ text: "asdfsgevsdfwerqwterg", comments: [] }],
-          },
-        ],
-      },
-      {
-        id: 1,
-        title: "TODOLIST 222",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur cumque dolorem similique minima adipisci eligendi voluptas voluptatum ut saepe laudantium!",
-        prior: "high",
-        tasks: [
-          { title: "Dnd", completed: true },
-          { title: "UI", completed: false },
-        ],
-        deadline: "23-12-2022",
-        devTime: 0,
-        created: new Date(),
-        files: [],
-        comments: [
-          {
-            text: "lorem lorem lorem lorem",
-            comments: [{ text: "asdfsgevsdfwerqwterg", comments: [] }],
-          },
-        ],
-      },
+      // {
+      //   id: 1,
+      //   title: "TODOLIST 222",
+      //   desc: {
+      //     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur cumque dolorem similique minima adipisci eligendi voluptas voluptatum ut saepe laudantium!",
+      //     html: "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur cumque dolorem similique minima adipisci eligendi voluptas voluptatum ut saepe laudantium!</p>",
+      //   },
+      //   prior: "high",
+      //   tasks: [
+      //     { title: "Dnd", completed: true, id: 1 },
+      //     { title: "UI", completed: false, id: 2 },
+      //   ],
+      //   deadline: "23-12-2022",
+      //   devTime: 0,
+      //   created: new Date(),
+      //   files: [],
+      //   comments: [
+      //     {
+      //       text: "lorem lorem lorem lorem",
+      //       comments: [{ text: "asdfsgevsdfwerqwterg", comments: [] }],
+      //     },
+      //   ],
+      // },
     ],
   },
   {

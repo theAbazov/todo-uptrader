@@ -28,7 +28,7 @@ export class projectService {
 
   removeProject(id: number) {
     let projects: Project[] = JSON.parse(localStorage.getItem("projects")!);
-    projects.filter(({ id: currentId }) => currentId !== id);
+    projects = projects.filter((project) => project.id !== id);
     localStorage.setItem("projects", JSON.stringify(projects));
     return projects;
   }

@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Board, Project } from "../../types";
 import "./Boards.scss";
 import { Item } from "../../types/main";
+import { secondsToHours, millisecondsToHours } from "date-fns";
 import { TaskDetail } from "../TaskDetail";
 import {
   onDrop,
@@ -12,6 +13,7 @@ import {
   onOver,
 } from "../../services/dndService";
 import { editProject, removeProject } from "../../services/projectService";
+import Create from "../CreateTaskModal/Create";
 
 const EditProjectName: FC<{
   setModal: Function;
@@ -24,7 +26,7 @@ const EditProjectName: FC<{
     e.preventDefault();
     if (!newName) return;
     setProjects(editProject(newName, id));
-    setModal(false);
+    setModal("");
     setNewName("");
   };
 
@@ -54,20 +56,21 @@ export const Boards: FC<{ setProjects: Function; projects: Project[] }> = ({
   setProjects,
   projects,
 }) => {
+  const navigate = useNavigate();
   const { projectId } = useParams();
 
   const [boards, setBoards] = useState<Board[]>();
   const [projectName, setProjName] = useState("");
 
   // modal states
-  const [detail, setDetail] = useState<boolean>(false);
+  const [modal, setModal] = useState<string>("");
   const [currentDetail, setCurrentDetail] = useState<Item>();
   const [projectModal, setProjectModal] = useState(false);
   // modal states
 
   //DnD states
-  const [currentBoard, setCurrentBoard] = useState<Board>();
-  const [currentItem, setCurrentItem] = useState<Item>();
+  const [currentBoard, setCurrentBoard] = useState<Board | null>(null);
+  const [currentItem, setCurrentItem] = useState<Item | null>(null);
   //DnD states
 
   useEffect(() => {
@@ -84,10 +87,11 @@ export const Boards: FC<{ setProjects: Function; projects: Project[] }> = ({
   // DnD actions start
   const handleMore = (item: Item) => {
     setCurrentDetail(item);
-    setDetail(true);
+    setModal("detail");
   };
 
   const handleStart = (e: any, board: Board, item: Item) => {
+    e.stopPropagation();
     setCurrentBoard(board);
     setCurrentItem(item);
   };
@@ -107,17 +111,14 @@ export const Boards: FC<{ setProjects: Function; projects: Project[] }> = ({
     let projects: Project[] = JSON.parse(localStorage.getItem("projects")!);
 
     if (boards) {
-      const result = JSON.stringify(
-        projects.map((project) => {
-          if (project.id === +projectId!) {
-            project.data = boards!;
-          }
-          return project;
-        })
-      );
-
-      localStorage.setItem("projects", result);
+      projects = projects.map((project) => {
+        if (project.id === +projectId!) {
+          project.data = boards!;
+        }
+        return project;
+      });
     }
+    localStorage.setItem("projects", JSON.stringify(projects));
   };
 
   useEffect(saveEffect, [boards, projectId]);
@@ -128,6 +129,7 @@ export const Boards: FC<{ setProjects: Function; projects: Project[] }> = ({
     const conf = confirm("Are you sure to delete this project?");
     if (!conf) return;
     setProjects(removeProject(+projectId!));
+    navigate("/");
   };
 
   return (
@@ -139,7 +141,30 @@ export const Boards: FC<{ setProjects: Function; projects: Project[] }> = ({
           id={+projectId!}
         />
       )}
-      {detail && <TaskDetail setModal={setDetail} data={currentDetail} />}
+      {modal === "detail" ? (
+        <TaskDetail
+          setProjects={setProjects}
+          setModal={setModal}
+          data={currentDetail}
+          projectId={+projectId!}
+        />
+      ) : modal === "create" ? (
+        <Create
+          type="Create"
+          setProjects={setProjects}
+          setModal={setModal}
+          projectId={+projectId!}
+          item={undefined}
+        />
+      ) : modal === "edit" ? (
+        <Create
+          type="Edit"
+          setProjects={setProjects}
+          setModal={setModal}
+          projectId={+projectId!}
+          item={currentDetail}
+        />
+      ) : null}
       <div className="desks__header">
         <div className="desks__header-start">
           <h1 className="desks__header-title">{projectName}</h1>
@@ -164,9 +189,24 @@ export const Boards: FC<{ setProjects: Function; projects: Project[] }> = ({
                 key={board.id}
                 className="board desk__board"
               >
-                <h2 className="board__title">{board.title}</h2>
-                <ul>
+                <h2 className="board__title">
+                  {board.title}
+                  {board.id === 1 ? (
+                    <button
+                      style={{
+                        marginLeft: "50px",
+                        padding: "5px 10px",
+                        background: "green",
+                      }}
+                      onClick={() => setModal("create")}
+                    >
+                      +
+                    </button>
+                  ) : null}
+                </h2>
+                <ul className="item-wapper">
                   {board.items.map((item) => {
+                    const isDead = Date.parse(item.deadline) - Date.now() < 0;
                     return (
                       <div
                         key={item.id}
@@ -177,6 +217,10 @@ export const Boards: FC<{ setProjects: Function; projects: Project[] }> = ({
                         onDragEnd={onEnd}
                         onDrop={(e) => handleDrop(e, board, item)}
                         className="board__item item"
+                        style={{
+                          borderColor:
+                            isDead && board.id !== 3 ? "red" : "#30363d",
+                        }}
                       >
                         <div className="item__head">
                           <h3 className="item__title">
@@ -192,7 +236,10 @@ export const Boards: FC<{ setProjects: Function; projects: Project[] }> = ({
                           <div className="item__deadline">{item.deadline}</div>
                         </div>
                         <div className="item__body">
-                          <div></div>
+                          <div>
+                            <p>Files: {item.files?.length}</p>
+                            <p>Created: {item.created.toString()}</p>
+                          </div>
                           <button
                             className="item__more"
                             onClick={() => handleMore(item)}

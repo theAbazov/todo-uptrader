@@ -25,3 +25,32 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+//@at-root
+
+.tox-tinymce {
+  border: 2px solid $border-color !important;
+}
+
+.tox-statusbar {
+  display: none !important;
+}
+
+.tox-editor-container {
+  background: $card-color !important;
+}
+.tox-editor-header {
+  border: 1px solid $border-color;
+}
+
+.tox .tox-toolbar-overlord {
+  background-color: $card-color !important;
+}
+
+.tox .tox-edit-area__iframe {
+  background-color: rgb(87, 87, 87) !important;
+}
+
+.mce-content-body {
+  color: white !important;
+}

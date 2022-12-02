@@ -7,7 +7,7 @@ export interface Item {
   tasks: Task[];
   files?: File[];
   deadline: string;
-  created: Date;
+  created: Date | string;
   devTime: number;
 }
 
@@ -19,6 +19,7 @@ export interface File {
 export interface Task {
   title: string;
   completed: boolean;
+  id: number;
 }
 
 export interface Comment {

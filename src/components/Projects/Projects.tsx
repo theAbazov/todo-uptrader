@@ -13,7 +13,6 @@ export const Projects: FC<{ setProjects: Function; projects: Project[] }> = ({
   const handleCreate = (e: any) => {
     e.preventDefault();
     if (!name) return;
-    if (!name) return;
     setProjects(createProject(name));
     setName("");
   };
