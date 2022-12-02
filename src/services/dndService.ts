@@ -1,3 +1,4 @@
+import { v4 } from "uuid";
 import { Board, Item } from "../types/main";
 
 class dndService {
@@ -91,8 +92,16 @@ const init: Board[] = [
         files: [],
         comments: [
           {
+            id: v4(),
             text: "lorem lorem lorem lorem",
-            comments: [{ text: "asdfsgevsdfwerqwterg", comments: [] }],
+            comments: [
+              { id: v4(), text: "asdfsgevsdfwerqwterg", comments: [] },
+            ],
+          },
+          {
+            id: v4(),
+            text: "asdfdgdasf",
+            comments: [],
           },
         ],
       },

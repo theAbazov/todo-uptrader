@@ -23,6 +23,7 @@ export interface Task {
 }
 
 export interface Comment {
+  id: string;
   text: string;
   comments: Comment[];
 }

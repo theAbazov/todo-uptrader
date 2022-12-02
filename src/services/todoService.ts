@@ -1,4 +1,4 @@
-import { Item, Project, Task } from "../types";
+import { Comment, Item, Project, Task } from "../types";
 
 class Todo {
   createTodo(projId: number, newTodo: Item) {
@@ -84,6 +84,59 @@ class Todo {
     localStorage.setItem("projects", JSON.stringify(projects));
     return res;
   }
+
+  commentParent(projId: number, itemId: number, newComment: Comment) {
+    let res: Comment[] = [];
+    let projects: Project[] = JSON.parse(localStorage.getItem("projects")!);
+    projects = projects.map((project) => {
+      if (projId === project.id) {
+        project.data = project.data.map((board) => {
+          board.items = board.items.map((item) => {
+            if (item.id === itemId) {
+              item.comments.push(newComment);
+              res = item.comments;
+            }
+            return item;
+          });
+          return board;
+        });
+      }
+      return project;
+    });
+    localStorage.setItem("projects", JSON.stringify(projects));
+    return res;
+  }
+
+  commentChild(commentId: string, itemId: number, newComment: Comment) {
+    const recourse = (comments: Comment[]) => {
+      return comments.map((comment) => {
+        if (comment.id === commentId) {
+          comment.comments.push(newComment);
+        }
+        if (comment.comments.length) {
+          comment.comments = recourse(comment.comments);
+        }
+        return comment;
+      });
+    };
+    let res: Comment[] = [];
+    let projects: Project[] = JSON.parse(localStorage.getItem("projects")!);
+    projects = projects.map((project) => {
+      project.data = project.data.map((board) => {
+        board.items = board.items.map((item) => {
+          item.comments = recourse(item.comments);
+          if (item.id === itemId) {
+            res = item.comments;
+          }
+          return item;
+        });
+        return board;
+      });
+      return project;
+    });
+    localStorage.setItem("projects", JSON.stringify(projects));
+    return res;
+  }
 }
 
 export const {
@@ -92,4 +145,6 @@ export const {
   deleteCurrentTodo,
   updateTodo,
   completeTogle,
+  commentChild,
+  commentParent,
 } = new Todo();

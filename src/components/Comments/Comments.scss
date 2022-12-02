@@ -1,9 +1,32 @@
+@import "../../vars.scss";
+
 .comments {
   margin-left: 20px;
+  padding-left: 10px;
+  border-left: 1px solid $border-color;
+  &__button {
+    background: $border-color;
+    border: 1px solid $borderHover-color;
+    padding: 0 5px;
+    color: $text-df;
+    border-radius: 3px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
   &__show {
     cursor: pointer;
   }
   &__text {
     margin-left: 20px;
   }
+  &__arrow {
+    padding: 0px 3px;
+    height: 10px;
+    font-size: 20px;
+    font-weight: 400;
+  }
+}
+.cancel {
+  background: rgb(65, 7, 7);
+  color: white;
 }

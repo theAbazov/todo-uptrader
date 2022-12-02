@@ -1,9 +1,14 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { completeTogle, deleteCurrentTodo } from "../../services/todoService";
-import { Item } from "../../types";
+import {
+  commentParent,
+  completeTogle,
+  deleteCurrentTodo,
+} from "../../services/todoService";
+import { Comment, Item } from "../../types";
 import { Comments } from "../Comments/Comments";
 import "./TaskDetail.scss";
+import { v4 } from "uuid";
 
 export const TaskDetail: FC<{
   setModal: Function;
@@ -21,11 +26,14 @@ export const TaskDetail: FC<{
     created,
     deadline,
     devTime,
-    comments,
+    comments: propComments,
   } = data!;
 
   const navigate = useNavigate();
   const [tasks, setTasks] = useState(propTasks);
+  const [comments, setComments] = useState(propComments);
+  const [commentInput, setCommentInput] = useState(false);
+  const [commentValue, setCommentValue] = useState("");
 
   const handleDelete = (e: any) => {
     // eslint-disable-next-line no-restricted-globals
@@ -39,7 +47,18 @@ export const TaskDetail: FC<{
     const res = completeTogle(projectId, id, taskId);
     setTasks(res);
   };
-  console.log(comments);
+
+  const handleComment = (e: any) => {
+    e.preventDefault();
+    const newComment: Comment = {
+      id: v4(),
+      text: commentValue,
+      comments: [],
+    };
+    setComments(commentParent(projectId, id, newComment));
+    setCommentInput(false);
+    setCommentValue("");
+  };
 
   return (
     <div onClick={() => setModal(false)} className="taskdetail">
@@ -73,7 +92,33 @@ export const TaskDetail: FC<{
         </div>
         <div className="taskdetail__desc">
           <p>{desc}</p>
-          <Comments comments={comments} />
+          {commentInput ? (
+            <form onSubmit={(e) => handleComment(e)}>
+              <input
+                autoFocus
+                type="text"
+                value={commentValue}
+                onChange={(e) => setCommentValue(e.target.value)}
+                placeholder="Comment"
+                width={150}
+              />
+              <button className="comments__button">Comment</button>
+              <button
+                onClick={() => setCommentInput(false)}
+                className="comments__button cancel"
+              >
+                Cancel
+              </button>
+            </form>
+          ) : (
+            <button
+              onClick={() => setCommentInput(true)}
+              className="comments__button"
+            >
+              Comment
+            </button>
+          )}
+          <Comments comments={comments} setComments={setComments} itemId={id} />
         </div>
         <ul className="taskdetail__childs">
           Tasks:
