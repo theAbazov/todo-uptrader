@@ -1,7 +1,7 @@
 import { Project } from "../types";
 import { initialBoard } from "./dndService";
 
-export class projectService {
+export class ProjectService {
   createProject(name: string) {
     const projects = JSON.parse(localStorage.getItem("projects")!);
     const newProject: Project = {
@@ -13,6 +13,7 @@ export class projectService {
     localStorage.setItem("projects", JSON.stringify(projects));
     return projects;
   }
+
   editProject(name: string, id: number) {
     let projects: Project[] = JSON.parse(localStorage.getItem("projects")!);
     projects = projects.map((project) => {
@@ -34,4 +35,4 @@ export class projectService {
 }
 
 export const { createProject, editProject, removeProject } =
-  new projectService();
+  new ProjectService();

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React, { FC, useEffect, useState } from "react";
 import { createTodo, updateTodo } from "../../services/todoService";
 import { File, Item, Project, Task } from "../../types";
@@ -108,7 +109,7 @@ const Create: FC<{
       tasks.map((task) => {
         if (task.id === id) task.completed = !task.completed;
         return task;
-      })
+      }),
     );
   };
 

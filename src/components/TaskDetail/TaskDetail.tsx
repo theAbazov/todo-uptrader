@@ -5,17 +5,17 @@ import {
   completeTogle,
   deleteCurrentTodo,
 } from "../../services/todoService";
+import { v4 } from "uuid";
 import { Comment, Item } from "../../types";
 import { Comments } from "../Comments/Comments";
 import "./TaskDetail.scss";
-import { v4 } from "uuid";
+import { format } from "date-fns";
 
 export const TaskDetail: FC<{
   setModal: Function;
   data: Item | undefined;
   projectId: number;
-  setProjects: Function;
-}> = ({ setModal, data, projectId, setProjects }) => {
+}> = ({ setModal, data, projectId }) => {
   const {
     id,
     title,
@@ -24,18 +24,28 @@ export const TaskDetail: FC<{
     tasks: propTasks,
     files,
     created,
-    deadline,
+    deadline: propDead,
     devTime,
     comments: propComments,
   } = data!;
 
   const navigate = useNavigate();
+  // Стейты просто для обновления верстки, другого варианта не видел)
   const [tasks, setTasks] = useState(propTasks);
   const [comments, setComments] = useState(propComments);
+  // Стейты просто для обновления верстки
   const [commentInput, setCommentInput] = useState(false);
   const [commentValue, setCommentValue] = useState("");
 
+  // spread не сработал для  new Date(...deadline) внизу
+  const deadline = propDead.split("-");
+  const d1 = +deadline[2];
+  const d2 = +deadline[1] - 1;
+  const d3 = +deadline[0];
+  // spread не сработал для  new Date(...deadline) внизу
+
   const handleDelete = (e: any) => {
+    e.preventDefault();
     // eslint-disable-next-line no-restricted-globals
     const conf = confirm("Are you sure to delete the task?");
     if (!conf) return;
@@ -159,10 +169,10 @@ export const TaskDetail: FC<{
           <div>
             Development time:{" "}
             {`${Math.floor(devTime / 60 / 60)} : ${Math.floor(
-              (devTime / 60) % 60
+              (devTime / 60) % 60,
             )} : ${devTime % 60}s`}
           </div>
-          <div>Deadline: {deadline}</div>
+          <div>Deadline: {format(new Date(d1, d2, d3), "PP")}</div>
         </div>
       </div>
     </div>

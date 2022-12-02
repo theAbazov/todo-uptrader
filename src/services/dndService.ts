@@ -1,8 +1,8 @@
-import { v4 } from "uuid";
 import { Board, Item } from "../types/main";
 
-class dndService {
+class DndService {
   private initBoard: Board[];
+
   constructor(init: Board[]) {
     this.initBoard = init;
   }
@@ -15,7 +15,7 @@ class dndService {
     board: Board,
     currentItem: Item,
     currentBoard: Board,
-    boards: Board[]
+    boards: Board[],
   ) {
     board!.items.push(currentItem);
     const currentIndex = currentBoard!.items!.indexOf(currentItem!);
@@ -36,7 +36,7 @@ class dndService {
     item: Item,
     currentBoard: Board,
     currentItem: Item,
-    boards: Board[]
+    boards: Board[],
   ) {
     const currentIndex = currentBoard!.items!.indexOf(currentItem!);
     currentBoard?.items!.splice(currentIndex, 1);
@@ -91,4 +91,4 @@ const init: Board[] = [
 ];
 
 export const { onDrop, initialBoard, onEnd, onLeave, onDropBoard, onOver } =
-  new dndService(init);
+  new DndService(init);

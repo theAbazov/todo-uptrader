@@ -1,0 +1,12 @@
+{
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": false,
+  "trailingComma": "all",
+  "importOrder": ["^react", "^[a-zA-Z]", "(.css)$", "(.scss)$", "^[{../,./}]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "printWidth": 80,
+  "useTabs": false,
+  "endOfLine": "auto"
+}

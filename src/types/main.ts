@@ -39,5 +39,3 @@ export interface Project {
   projectName: string;
   data: Board[];
 }
-
-export type setFn = (boards: Board[]) => any;

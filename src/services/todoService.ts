@@ -47,7 +47,7 @@ class Todo {
       if (projId === project.id) {
         project.data = project.data.map((board) => {
           board.items = board.items.map((item) =>
-            item.id === itemId ? newItem : item
+            item.id === itemId ? newItem : item,
           );
           return board;
         });

@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Board, Project } from "../../types";
 import "./Boards.scss";
 import { Item } from "../../types/main";
-import { secondsToHours, millisecondsToHours } from "date-fns";
 import { TaskDetail } from "../TaskDetail";
 import {
   onDrop,
@@ -143,7 +142,6 @@ export const Boards: FC<{ setProjects: Function; projects: Project[] }> = ({
       )}
       {modal === "detail" ? (
         <TaskDetail
-          setProjects={setProjects}
           setModal={setModal}
           data={currentDetail}
           projectId={+projectId!}
@@ -226,7 +224,14 @@ export const Boards: FC<{ setProjects: Function; projects: Project[] }> = ({
                           <h3 className="item__title">
                             <span
                               className="indicator"
-                              style={{ background: prior(item.prior) }}
+                              style={{
+                                background:
+                                  item.prior === "average"
+                                    ? "yellow"
+                                    : item.prior === "high"
+                                    ? "red"
+                                    : "green",
+                              }}
                             ></span>
                             {item.title}
                             <span className="item__title-taskcount">
@@ -257,8 +262,4 @@ export const Boards: FC<{ setProjects: Function; projects: Project[] }> = ({
       </div>
     </div>
   );
-};
-
-const prior = (p: string) => {
-  return p === "average" ? "yellow" : p === "high" ? "red" : "green";
 };
