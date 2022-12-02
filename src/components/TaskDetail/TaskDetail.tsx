@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { completeTogle, deleteCurrentTodo } from "../../services/todoService";
 import { Item } from "../../types";
+import { Comments } from "../Comments/Comments";
 import "./TaskDetail.scss";
 
 export const TaskDetail: FC<{
@@ -20,6 +21,7 @@ export const TaskDetail: FC<{
     created,
     deadline,
     devTime,
+    comments,
   } = data!;
 
   const navigate = useNavigate();
@@ -37,6 +39,7 @@ export const TaskDetail: FC<{
     const res = completeTogle(projectId, id, taskId);
     setTasks(res);
   };
+  console.log(comments);
 
   return (
     <div onClick={() => setModal(false)} className="taskdetail">
@@ -68,7 +71,10 @@ export const TaskDetail: FC<{
             </button>
           </div>
         </div>
-        <div className="taskdetail__desc">{desc}</div>
+        <div className="taskdetail__desc">
+          <p>{desc}</p>
+          <Comments comments={comments} />
+        </div>
         <ul className="taskdetail__childs">
           Tasks:
           {tasks.length
@@ -107,9 +113,9 @@ export const TaskDetail: FC<{
           <div>Created: {created + ""}</div>
           <div>
             Development time:{" "}
-            {`${Math.floor(devTime / 60 / 24)} day, ${Math.floor(
-              devTime / 60
-            )} : ${devTime % 60}`}
+            {`${Math.floor(devTime / 60 / 60)} : ${Math.floor(
+              (devTime / 60) % 60
+            )} : ${devTime % 60}s`}
           </div>
           <div>Deadline: {deadline}</div>
         </div>
