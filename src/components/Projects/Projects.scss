@@ -50,10 +50,13 @@
   &__container {
     display: flex;
     margin-top: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
   }
 
   &__item {
     text-align: center;
+    width: 31.8%;
     background: $card-color;
     padding: 20px 40px;
     border: 1px solid $border-color;
