@@ -19,7 +19,7 @@ const App: FC = () => {
   }, [projects]);
 
   useEffect(() => {
-    const intervalId = setInterval(() => incrementDevtime(), 1000);
+    const intervalId = setInterval(incrementDevtime, 1000);
     return () => clearInterval(intervalId);
   }, []);
 

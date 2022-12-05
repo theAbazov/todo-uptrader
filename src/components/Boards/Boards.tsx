@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Board, Project } from "../../types";
-import "./Boards.scss";
 import { Item } from "../../types/main";
 import { TaskDetail } from "../TaskDetail";
 import {
@@ -13,6 +12,7 @@ import {
 } from "../../services/dndService";
 import { editProject, removeProject } from "../../services/projectService";
 import Create from "../CreateTaskModal/Create";
+import "./Boards.scss";
 
 const EditProjectName: FC<{
   setModal: Function;

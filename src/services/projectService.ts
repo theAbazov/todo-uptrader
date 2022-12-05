@@ -1,4 +1,4 @@
-import { Project } from "../types";
+import { Board, Item, Project } from "../types";
 import { initialBoard } from "./dndService";
 
 export class ProjectService {
@@ -31,6 +31,22 @@ export class ProjectService {
     projects = projects.filter((project) => project.id !== id);
     localStorage.setItem("projects", JSON.stringify(projects));
     return projects;
+  }
+
+  searchTodo(name: string) {
+    const search = Number.isNaN(+name) ? name : +name;
+    const result: Item[] = [];
+    const projects: Project[] = JSON.parse(localStorage.getItem("projects")!);
+    projects.map((project: Project) =>
+      project.data.forEach((borad: Board) =>
+        borad.items.forEach((item: Item) => {
+          if (item.id === search || item.title === search) {
+            result.push(item);
+          }
+        }),
+      ),
+    );
+    return result;
   }
 }
 
