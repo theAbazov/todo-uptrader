@@ -1,2 +1,2 @@
 
-<a href="https://vercel.com/theabazov/todo-uptrader">Сюда</a>
+<a href="https://todo-uptrader.vercel.app/">Ссылка на развернутое приложение</a>
