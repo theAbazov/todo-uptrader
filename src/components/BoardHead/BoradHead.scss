@@ -1,0 +1,34 @@
+@import "../../vars.scss";
+
+.desks {
+  &__header {
+    background: $card-color;
+    height: 80px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    &-start {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+    }
+    .btns {
+      border: 1px solid $border-color;
+      outline: none;
+      padding: 3px 15px;
+      border-radius: 5px;
+      color: $text-df;
+      &:hover {
+        color: white;
+        border-color: $borderHover-color;
+      }
+    }
+    &-edit {
+      margin-left: 20px;
+      background: $bg-color;
+    }
+    &-delete {
+      background: $danger-color;
+    }
+  }
+}

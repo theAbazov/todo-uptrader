@@ -1,0 +1,28 @@
+.board {
+  width: 30%;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  height: 400px;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgb(65, 65, 67); /* color of the tracking area */
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(169, 161, 148); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+  }
+  &__title {
+    padding: 10px 0;
+    font-size: 24px;
+    text-align: center;
+    border-bottom: 1px solid $border-color;
+  }
+  &__item {
+    width: 90%;
+    margin: 10px auto;
+    height: 100px;
+  }
+}

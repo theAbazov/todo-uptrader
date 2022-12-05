@@ -1,0 +1,41 @@
+@import "../../vars.scss";
+
+.editProject {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.759);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  &__content {
+    display: flex;
+    input,
+    button {
+      color: $text-df;
+      height: 24px;
+      outline: none;
+      padding: 5px 15px;
+      border: 1px solid $border-color;
+      border-radius: 5px;
+    }
+    input {
+      background: $card-color;
+      margin-right: 20px;
+    }
+    button {
+      background: $success-color;
+    }
+  }
+}
+
+.indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 0 5px;
+}

@@ -1,0 +1,26 @@
+@import "../../vars.scss";
+
+.project {
+  text-align: center;
+  width: 31.8%;
+  background: $card-color;
+  padding: 20px 40px;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  &__item {
+    &-go {
+      background: $success-color;
+      border: 1px solid $border-color;
+      padding: 3px 15px;
+      border-radius: 5px;
+      &:hover {
+        color: white;
+        border-color: $borderHover-color;
+      }
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+  }
+}

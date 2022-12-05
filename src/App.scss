@@ -54,3 +54,59 @@ a {
 .mce-content-body {
   color: white !important;
 }
+
+.projects {
+  &__form {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    background: $card-color;
+    padding: 0 30px;
+    justify-content: space-between;
+    input {
+      height: 35px;
+      font-size: 14px;
+      width: 300px;
+      border-radius: 10px;
+      border: 1px solid $border-color;
+      padding: 0 10px;
+      outline: none;
+      background: $bg-color;
+      color: $text-df;
+      &:focus {
+        border-color: $borderHover-color;
+      }
+    }
+    button {
+      font-size: 14px;
+      border-radius: 10px;
+      border: 1px solid $border-color;
+      padding: 0 10px;
+      outline: none;
+      background: $bg-color;
+      color: $text-df;
+      height: 35px;
+      width: 70px;
+      margin-left: 20px;
+      &:focus {
+        border-color: $borderHover-color;
+      }
+      &:hover {
+        color: $text-secondary;
+      }
+    }
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 36px;
+    margin-top: 20px;
+  }
+
+  &__container {
+    display: flex;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}

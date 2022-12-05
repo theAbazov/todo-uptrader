@@ -2,9 +2,9 @@ import React, { FC, useEffect, useState } from "react";
 import "./App.scss";
 import { Project } from "./types";
 import { Route, Routes } from "react-router-dom";
-import { Projects } from "./components/Projects";
-import { Boards } from "./components/Boards";
 import { incrementDevtime } from "./services/todoService";
+import { BoardsPage } from "./pages/BoardsPage";
+import { Home } from "./pages/Home";
 
 const App: FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -28,11 +28,11 @@ const App: FC = () => {
       <Routes>
         <Route
           path="/"
-          element={<Projects projects={projects} setProjects={setProjects} />}
+          element={<Home projects={projects} setProjects={setProjects} />}
         />
         <Route
           path="/project/:projectId"
-          element={<Boards setProjects={setProjects} projects={projects} />}
+          element={<BoardsPage setProjects={setProjects} projects={projects} />}
         />
       </Routes>
     </div>
